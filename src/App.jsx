@@ -3,6 +3,7 @@ import Home from './pages/Home.jsx';
 import LessonPrint from './pages/LessonPrint.jsx';
 import Exercises from './pages/Exercises.jsx';
 import ExercisesPrint from './pages/ExercisesPrint.jsx';
+import Settings from './pages/Settings.jsx';
 
 export default function App() {
   return (
@@ -15,6 +16,9 @@ export default function App() {
           <Link to="/exercises" className="text-sm text-slate-600 hover:text-sky-700">
             Bài tập
           </Link>
+          <Link to="/settings" className="text-sm text-slate-600 hover:text-sky-700">
+            Cài đặt
+          </Link>
         </div>
       </header>
 
@@ -24,6 +28,7 @@ export default function App() {
           <Route path="/print" element={<LessonPrint />} />
           <Route path="/exercises" element={<Exercises />} />
           <Route path="/exercises/print" element={<ExercisesPrint />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </main>
     </div>
