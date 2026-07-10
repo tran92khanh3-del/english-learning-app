@@ -14,7 +14,7 @@ export default function AudioButton({ text, className = '' }) {
         speak(text);
       }}
       title={hasEnglishVoice ? `Nghe: ${text}` : 'Thiết bị chưa có giọng đọc tiếng Anh'}
-      className={`print:hidden inline-flex items-center justify-center text-sky-600 hover:text-sky-800 ${className}`}
+      className={`print:hidden inline-flex items-center justify-center text-sky-600 hover:text-sky-800 hover:scale-125 active:scale-95 transition-transform ${className}`}
     >
       🔊
     </button>

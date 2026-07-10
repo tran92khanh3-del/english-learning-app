@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply font-kid;
+  }
+}
+
 /* Khổ giấy A4 cho phiếu in */
 .print-sheet {
   width: 210mm;

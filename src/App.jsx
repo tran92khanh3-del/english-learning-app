@@ -7,18 +7,26 @@ import Settings from './pages/Settings.jsx';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800">
-      <header className="print:hidden bg-white border-b border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
-          <Link to="/" className="text-lg font-bold text-sky-700">
-            📚 Trung Tâm Học &amp; In Tiếng Anh
+    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white text-slate-800">
+      <header className="print:hidden bg-white border-b-4 border-sky-200 shadow-sm">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-2">
+          <Link to="/" className="text-xl font-extrabold text-sky-700 flex items-center gap-2">
+            <span className="text-2xl">📚</span> Trung Tâm Học &amp; In Tiếng Anh
           </Link>
-          <Link to="/exercises" className="text-sm text-slate-600 hover:text-sky-700">
-            Bài tập
-          </Link>
-          <Link to="/settings" className="text-sm text-slate-600 hover:text-sky-700">
-            Cài đặt
-          </Link>
+          <nav className="ml-auto flex items-center gap-2">
+            <Link
+              to="/exercises"
+              className="px-4 py-2 rounded-full text-sm font-bold text-white bg-orange-400 shadow-pop hover:bg-orange-500 active:translate-y-0.5 active:shadow-none transition"
+            >
+              ✏️ Bài tập
+            </Link>
+            <Link
+              to="/settings"
+              className="px-4 py-2 rounded-full text-sm font-bold text-white bg-violet-400 shadow-pop hover:bg-violet-500 active:translate-y-0.5 active:shadow-none transition"
+            >
+              ⚙️ Cài đặt
+            </Link>
+          </nav>
         </div>
       </header>
 

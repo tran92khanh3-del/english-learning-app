@@ -45,13 +45,13 @@ export default function Home() {
                 setSelectedUnit(u.unit);
                 setPage('');
               }}
-              className={`px-4 py-2 rounded-lg border text-sm font-medium transition ${
+              className={`px-4 py-2.5 rounded-2xl border-2 text-sm font-bold transition shadow-pop active:translate-y-0.5 active:shadow-none ${
                 selectedUnit === u.unit
-                  ? 'bg-sky-600 text-white border-sky-600'
-                  : 'bg-white text-slate-700 border-slate-300 hover:border-sky-400'
+                  ? 'bg-sky-500 text-white border-sky-500'
+                  : 'bg-white text-slate-700 border-slate-200 hover:border-sky-300'
               }`}
             >
-              Unit {u.unit}: {u.title}
+              📘 Unit {u.unit}: {u.title}
             </button>
           ))}
         </div>
@@ -81,7 +81,7 @@ export default function Home() {
 
             <Link
               to={`/print?unit=${selectedUnit}${page ? `&page=${page}` : ''}`}
-              className="ml-auto px-4 py-1.5 rounded-lg bg-sky-600 text-white text-sm font-medium hover:bg-sky-700"
+              className="ml-auto px-4 py-2 rounded-full bg-sky-500 text-white text-sm font-bold shadow-pop hover:bg-sky-600 active:translate-y-0.5 active:shadow-none transition"
             >
               🖨️ In danh sách
             </Link>
@@ -100,32 +100,32 @@ function VocabularyTable({ words }) {
   }
 
   return (
-    <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
+    <div className="overflow-x-auto rounded-2xl border-2 border-sky-100 bg-white shadow-sm">
       <table className="w-full text-sm">
-        <thead className="bg-slate-100 text-slate-600">
+        <thead className="bg-sky-100 text-sky-800">
           <tr>
-            <th className="text-left px-3 py-2 font-semibold">Từ</th>
-            <th className="text-left px-3 py-2 font-semibold">Phiên âm</th>
-            <th className="text-left px-3 py-2 font-semibold">Loại</th>
-            <th className="text-left px-3 py-2 font-semibold">Nghĩa</th>
-            <th className="text-left px-3 py-2 font-semibold">Trang</th>
-            <th className="text-left px-3 py-2 font-semibold">Ví dụ</th>
+            <th className="text-left px-3 py-2.5 font-bold">Từ</th>
+            <th className="text-left px-3 py-2.5 font-bold">Phiên âm</th>
+            <th className="text-left px-3 py-2.5 font-bold">Loại</th>
+            <th className="text-left px-3 py-2.5 font-bold">Nghĩa</th>
+            <th className="text-left px-3 py-2.5 font-bold">Trang</th>
+            <th className="text-left px-3 py-2.5 font-bold">Ví dụ</th>
           </tr>
         </thead>
         <tbody>
           {words.map((w, i) => (
-            <tr key={`${w.word}-${i}`} className="border-t border-slate-100">
-              <td className="px-3 py-2 font-medium text-slate-800">
+            <tr key={`${w.word}-${i}`} className="border-t border-sky-50 even:bg-sky-50/40 hover:bg-amber-50 transition-colors">
+              <td className="px-3 py-2.5 font-bold text-slate-800 text-base">
                 <span className="inline-flex items-center gap-1.5">
                   {w.word}
                   <AudioButton text={w.word} />
                 </span>
               </td>
-              <td className="px-3 py-2 text-slate-500">{w.ipa}</td>
-              <td className="px-3 py-2 text-slate-500">{w.pos}</td>
-              <td className="px-3 py-2">{w.meaning_vi}</td>
-              <td className="px-3 py-2 text-slate-500">{w.page}</td>
-              <td className="px-3 py-2 text-slate-500 italic">
+              <td className="px-3 py-2.5 text-slate-500">{w.ipa}</td>
+              <td className="px-3 py-2.5 text-slate-500">{w.pos}</td>
+              <td className="px-3 py-2.5">{w.meaning_vi}</td>
+              <td className="px-3 py-2.5 text-slate-500">{w.page}</td>
+              <td className="px-3 py-2.5 text-slate-500 italic">
                 {w.example && (
                   <span className="inline-flex items-center gap-1.5">
                     {w.example}

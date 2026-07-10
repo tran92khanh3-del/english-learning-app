@@ -14,33 +14,42 @@ function MultipleChoiceWeb({ exercise }) {
   const { answers, setAnswer, checked, check, result } = useExerciseState(exercise);
 
   return (
-    <div className="space-y-3">
-      <h3 className="font-semibold">{exercise.title}</h3>
-      <ol className="space-y-3 list-decimal list-inside">
+    <div className="space-y-4">
+      <h3 className="font-extrabold text-lg text-sky-700">{exercise.title}</h3>
+      <ol className="space-y-4 list-decimal list-inside">
         {exercise.items.map((item, i) => {
           const isCorrect = checked && result.perItem[i];
           const isWrong = checked && !result.perItem[i];
           return (
             <li key={i}>
-              <div className="inline-flex items-center gap-1.5">
+              <div className="inline-flex items-center gap-1.5 font-medium">
                 {item.question}
                 <AudioButton text={item.question} />
               </div>
-              <div className="flex flex-wrap gap-3 mt-1 ml-4">
-                {item.options.map((opt) => (
-                  <label key={opt} className="flex items-center gap-1 text-sm">
-                    <input
-                      type="radio"
-                      name={`${exercise.id}-${i}`}
-                      checked={answers[i] === opt}
-                      onChange={() => setAnswer(i, opt)}
-                    />
-                    {opt}
-                  </label>
-                ))}
+              <div className="flex flex-wrap gap-2 mt-2 ml-4">
+                {item.options.map((opt) => {
+                  const picked = answers[i] === opt;
+                  return (
+                    <label
+                      key={opt}
+                      className={`flex items-center gap-1.5 text-sm font-semibold px-3 py-1.5 rounded-full border-2 cursor-pointer transition ${
+                        picked ? 'bg-sky-500 text-white border-sky-500' : 'bg-white border-slate-200 hover:border-sky-300'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name={`${exercise.id}-${i}`}
+                        checked={picked}
+                        onChange={() => setAnswer(i, opt)}
+                        className="hidden"
+                      />
+                      {opt}
+                    </label>
+                  );
+                })}
               </div>
-              {isCorrect && <span className="text-xs text-green-600 ml-4">Đúng!</span>}
-              {isWrong && <span className="text-xs text-red-600 ml-4">Đáp án: {item.answer}</span>}
+              {isCorrect && <span className="text-xs font-bold text-green-600 ml-4">🎉 Đúng!</span>}
+              {isWrong && <span className="text-xs font-bold text-red-600 ml-4">❌ Đáp án: {item.answer}</span>}
             </li>
           );
         })}

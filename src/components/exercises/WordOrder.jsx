@@ -22,9 +22,9 @@ function WordOrderWeb({ exercise }) {
   const { answers, setAnswer, checked, check, result } = useExerciseState(exercise);
 
   return (
-    <div className="space-y-3">
-      <h3 className="font-semibold">{exercise.title}</h3>
-      <ol className="space-y-3 list-decimal list-inside">
+    <div className="space-y-4">
+      <h3 className="font-extrabold text-lg text-sky-700">{exercise.title}</h3>
+      <ol className="space-y-4 list-decimal list-inside">
         {exercise.items.map((item, i) => {
           const isCorrect = checked && result.perItem[i];
           const isWrong = checked && !result.perItem[i];
@@ -35,8 +35,8 @@ function WordOrderWeb({ exercise }) {
                 built={answers[i] ?? ''}
                 onChange={(text) => setAnswer(i, text)}
               />
-              {isCorrect && <span className="text-xs text-green-600">Đúng!</span>}
-              {isWrong && <span className="text-xs text-red-600">Đáp án: {item.answer}</span>}
+              {isCorrect && <span className="text-xs font-bold text-green-600">🎉 Đúng!</span>}
+              {isWrong && <span className="text-xs font-bold text-red-600">❌ Đáp án: {item.answer}</span>}
             </li>
           );
         })}
@@ -62,12 +62,12 @@ function WordOrderItem({ item, built, onChange }) {
   };
 
   return (
-    <div className="space-y-1">
-      <div className="min-h-[2rem] border-b border-dashed border-slate-300 flex flex-wrap items-center gap-1.5 pb-1">
+    <div className="space-y-2">
+      <div className="min-h-[2.5rem] border-b-2 border-dashed border-sky-300 flex flex-wrap items-center gap-1.5 pb-1.5">
         {chosen.length === 0 && <span className="text-slate-400 text-sm">(bấm các từ bên dưới theo thứ tự)</span>}
         {chosen.length > 0 && (
           <>
-            <span>{built}</span>
+            <span className="font-semibold">{built}</span>
             <AudioButton text={built} />
           </>
         )}
@@ -79,15 +79,21 @@ function WordOrderItem({ item, built, onChange }) {
             type="button"
             disabled={used.includes(idx)}
             onClick={() => pick(word, idx)}
-            className={`px-2 py-1 rounded-md border text-sm ${
-              used.includes(idx) ? 'opacity-30 border-slate-200' : 'border-slate-300 hover:border-sky-400 bg-white'
+            className={`px-3 py-1.5 rounded-full border-2 text-sm font-semibold transition ${
+              used.includes(idx)
+                ? 'opacity-30 border-slate-200'
+                : 'border-sky-200 hover:border-sky-400 hover:bg-sky-50 bg-white active:scale-95'
             }`}
           >
             {word}
           </button>
         ))}
         {chosen.length > 0 && (
-          <button type="button" onClick={reset} className="px-2 py-1 rounded-md text-sm text-slate-500 hover:text-red-600">
+          <button
+            type="button"
+            onClick={reset}
+            className="px-3 py-1.5 rounded-full text-sm font-semibold text-slate-500 hover:text-red-600 hover:bg-red-50 transition"
+          >
             ↺ Làm lại
           </button>
         )}

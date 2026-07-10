@@ -12,15 +12,15 @@ function FillBlankWeb({ exercise }) {
   const { answers, setAnswer, checked, check, result } = useExerciseState(exercise);
 
   return (
-    <div className="space-y-3">
-      <h3 className="font-semibold">{exercise.title}</h3>
-      <ol className="space-y-2 list-decimal list-inside">
+    <div className="space-y-4">
+      <h3 className="font-extrabold text-lg text-sky-700">{exercise.title}</h3>
+      <ol className="space-y-3 list-decimal list-inside">
         {exercise.items.map((item, i) => {
           const isCorrect = checked && result.perItem[i];
           const isWrong = checked && !result.perItem[i];
           return (
             <li key={i} className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5">
+              <span className="inline-flex items-center gap-1.5 font-medium">
                 {item.text}
                 <AudioButton text={item.text.replace('___', item.answer)} />
               </span>
@@ -28,11 +28,15 @@ function FillBlankWeb({ exercise }) {
                 type="text"
                 value={answers[i] ?? ''}
                 onChange={(e) => setAnswer(i, e.target.value)}
-                className={`border rounded-md px-2 py-1 text-sm w-32 ${
-                  isCorrect ? 'border-green-500 bg-green-50' : isWrong ? 'border-red-500 bg-red-50' : 'border-slate-300'
+                className={`border-2 rounded-xl px-3 py-1.5 text-sm w-32 outline-none transition ${
+                  isCorrect
+                    ? 'border-green-400 bg-green-50'
+                    : isWrong
+                      ? 'border-red-400 bg-red-50'
+                      : 'border-slate-200 focus:border-sky-400'
                 }`}
               />
-              {isWrong && <span className="text-xs text-red-600">Đáp án: {item.answer}</span>}
+              {isWrong && <span className="text-xs font-bold text-red-600">❌ Đáp án: {item.answer}</span>}
             </li>
           );
         })}

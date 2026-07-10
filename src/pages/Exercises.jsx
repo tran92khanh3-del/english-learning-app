@@ -38,13 +38,13 @@ export default function Exercises() {
             <button
               key={u.unit}
               onClick={() => setSelectedUnit(u.unit)}
-              className={`px-4 py-2 rounded-lg border text-sm font-medium transition ${
+              className={`px-4 py-2.5 rounded-2xl border-2 text-sm font-bold transition shadow-pop active:translate-y-0.5 active:shadow-none ${
                 selectedUnit === u.unit
-                  ? 'bg-sky-600 text-white border-sky-600'
-                  : 'bg-white text-slate-700 border-slate-300 hover:border-sky-400'
+                  ? 'bg-sky-500 text-white border-sky-500'
+                  : 'bg-white text-slate-700 border-slate-200 hover:border-sky-300'
               }`}
             >
-              Unit {u.unit}: {u.title}
+              📘 Unit {u.unit}: {u.title}
             </button>
           ))}
         </div>
@@ -53,17 +53,18 @@ export default function Exercises() {
       {selectedUnit != null && (
         <section className="space-y-4">
           <div className="flex items-center gap-3">
-            <label className="flex items-center gap-2 text-sm">
+            <label className="flex items-center gap-2 text-sm font-medium text-slate-600">
               <input
                 type="checkbox"
                 checked={includeGenerated}
                 onChange={(e) => setIncludeGenerated(e.target.checked)}
+                className="w-4 h-4 accent-sky-500"
               />
-              Tự sinh thêm bài tập từ từ vựng
+              🎲 Tự sinh thêm bài tập từ từ vựng
             </label>
             <Link
               to={`/exercises/print?unit=${selectedUnit}${includeGenerated ? '&generated=1' : ''}`}
-              className="ml-auto px-4 py-1.5 rounded-lg bg-sky-600 text-white text-sm font-medium hover:bg-sky-700"
+              className="ml-auto px-4 py-2 rounded-full bg-sky-500 text-white text-sm font-bold shadow-pop hover:bg-sky-600 active:translate-y-0.5 active:shadow-none transition"
             >
               🖨️ In bài tập
             </Link>
@@ -74,7 +75,10 @@ export default function Exercises() {
           ) : (
             <div className="space-y-8">
               {allExercises.map((ex) => (
-                <div key={ex.id} className="bg-white rounded-lg border border-slate-200 p-4">
+                <div
+                  key={ex.id}
+                  className="bg-white rounded-2xl border-2 border-sky-100 shadow-sm p-5 text-base"
+                >
                   <ExerciseRenderer exercise={ex} mode="web" />
                 </div>
               ))}

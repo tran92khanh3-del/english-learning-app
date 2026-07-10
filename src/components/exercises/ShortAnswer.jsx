@@ -12,15 +12,15 @@ function ShortAnswerWeb({ exercise }) {
   const { answers, setAnswer, checked, check, result } = useExerciseState(exercise);
 
   return (
-    <div className="space-y-3">
-      <h3 className="font-semibold">{exercise.title}</h3>
+    <div className="space-y-4">
+      <h3 className="font-extrabold text-lg text-sky-700">{exercise.title}</h3>
       <ol className="space-y-3 list-decimal list-inside">
         {exercise.items.map((item, i) => {
           const isCorrect = checked && result.perItem[i];
           const isWrong = checked && !result.perItem[i];
           return (
-            <li key={i} className="space-y-1">
-              <div className="inline-flex items-center gap-1.5">
+            <li key={i} className="space-y-1.5">
+              <div className="inline-flex items-center gap-1.5 font-medium">
                 {item.question}
                 <AudioButton text={item.question} />
               </div>
@@ -28,11 +28,15 @@ function ShortAnswerWeb({ exercise }) {
                 value={answers[i] ?? ''}
                 onChange={(e) => setAnswer(i, e.target.value)}
                 rows={2}
-                className={`block w-full border rounded-md px-2 py-1 text-sm ${
-                  isCorrect ? 'border-green-500 bg-green-50' : isWrong ? 'border-red-500 bg-red-50' : 'border-slate-300'
+                className={`block w-full border-2 rounded-xl px-3 py-1.5 text-sm outline-none transition ${
+                  isCorrect
+                    ? 'border-green-400 bg-green-50'
+                    : isWrong
+                      ? 'border-red-400 bg-red-50'
+                      : 'border-slate-200 focus:border-sky-400'
                 }`}
               />
-              {isWrong && <span className="text-xs text-red-600">Gợi ý đáp án: {item.answer}</span>}
+              {isWrong && <span className="text-xs font-bold text-red-600">💡 Gợi ý đáp án: {item.answer}</span>}
             </li>
           );
         })}
