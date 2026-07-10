@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useContent, getVocabulary } from '../hooks/useContent.js';
 
 export default function Home() {
@@ -76,6 +77,13 @@ export default function Home() {
             <span className="text-sm text-slate-400">
               {vocabulary.length} từ
             </span>
+
+            <Link
+              to={`/print?unit=${selectedUnit}${page ? `&page=${page}` : ''}`}
+              className="ml-auto px-4 py-1.5 rounded-lg bg-sky-600 text-white text-sm font-medium hover:bg-sky-700"
+            >
+              🖨️ In danh sách
+            </Link>
           </div>
 
           <VocabularyTable words={vocabulary} />

@@ -1,5 +1,6 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home.jsx';
+import LessonPrint from './pages/LessonPrint.jsx';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       <main className="max-w-5xl mx-auto px-4 py-6">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/print" element={<LessonPrint />} />
         </Routes>
       </main>
     </div>
