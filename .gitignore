@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+.env.*
+
+# File sách nguồn thô (lớn, nhị phân) — không đưa vào git
+*.pdf
+*.docx
