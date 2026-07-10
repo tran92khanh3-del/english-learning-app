@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useContent, getVocabulary } from '../hooks/useContent.js';
+import AudioButton from '../components/ui/AudioButton.jsx';
 
 export default function Home() {
   const { units } = useContent();
@@ -114,12 +115,24 @@ function VocabularyTable({ words }) {
         <tbody>
           {words.map((w, i) => (
             <tr key={`${w.word}-${i}`} className="border-t border-slate-100">
-              <td className="px-3 py-2 font-medium text-slate-800">{w.word}</td>
+              <td className="px-3 py-2 font-medium text-slate-800">
+                <span className="inline-flex items-center gap-1.5">
+                  {w.word}
+                  <AudioButton text={w.word} />
+                </span>
+              </td>
               <td className="px-3 py-2 text-slate-500">{w.ipa}</td>
               <td className="px-3 py-2 text-slate-500">{w.pos}</td>
               <td className="px-3 py-2">{w.meaning_vi}</td>
               <td className="px-3 py-2 text-slate-500">{w.page}</td>
-              <td className="px-3 py-2 text-slate-500 italic">{w.example}</td>
+              <td className="px-3 py-2 text-slate-500 italic">
+                {w.example && (
+                  <span className="inline-flex items-center gap-1.5">
+                    {w.example}
+                    <AudioButton text={w.example} />
+                  </span>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>
