@@ -56,6 +56,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Không xóa/sửa nội dung file `.md` của người dùng.** Parser chỉ đọc.
 - **Khi không chắc về schema hoặc yêu cầu:** dừng lại và hỏi, không đoán.
 
+### 2.1. Rủi ro thường gặp — lưu ý khi code
+
+- Sửa `exerciseGen.js` / `scoring.js` ⇒ kiểm tra **cả** `LessonWeb.jsx` lẫn `LessonPrint.jsx` dùng chung logic, không viết 2 bản riêng cho web và in.
+- `showAnswers` mặc định **tắt** — test cả 2 trạng thái bật/tắt đáp án trước khi coi là xong việc.
+- Sửa/thêm file trong `content/*.md` ⇒ chạy `scripts/validateContent.js` trước khi build (áp dụng từ sớm, không đợi đến Phase 5).
+- Test TTS (`useTTS.js`) với trường hợp thiết bị **thiếu giọng en-US/en-GB**, không giả định máy nào cũng có sẵn.
+
 ---
 
 ## 3. Tech Stack
