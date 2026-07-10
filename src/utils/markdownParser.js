@@ -1,23 +1,51 @@
 import matter from 'gray-matter';
+import yaml from 'js-yaml';
 
 /**
  * Đọc chuỗi markdown thô → object có cấu trúc.
- * Ở Phase 1 chỉ xử lý type "vocabulary" (bảng markdown). Các type khác
- * (reading/grammar/exercise) giữ nguyên phần body để phase sau xử lý.
+ * type "vocabulary" → bảng markdown. type "exercise" → các fenced block ```exercise```.
  *
  * @param {string} raw - nội dung .md thô
- * @returns {{ meta: object, vocabulary: Array, body: string }}
+ * @returns {{ meta: object, vocabulary: Array, exercises: Array, body: string }}
  */
 export function parseMarkdown(raw) {
   const { data: meta, content: body } = matter(raw);
 
-  const result = { meta, vocabulary: [], body };
+  const result = { meta, vocabulary: [], exercises: [], body };
 
   if (meta.type === 'vocabulary') {
     result.vocabulary = parseVocabularyTable(body);
   }
 
+  if (meta.type === 'exercise') {
+    result.exercises = parseExerciseBlocks(body);
+  }
+
   return result;
+}
+
+/**
+ * Trích các fenced code block ```exercise ... ``` trong body, parse YAML từng block.
+ * Xem docs/CONTENT_SCHEMA.md Mục 4.
+ */
+export function parseExerciseBlocks(body) {
+  const blockRe = /```exercise\n([\s\S]*?)```/g;
+  const exercises = [];
+  let match;
+  let i = 0;
+  while ((match = blockRe.exec(body)) !== null) {
+    const yamlText = match[1];
+    try {
+      const data = yaml.load(yamlText);
+      if (data && data.type) {
+        exercises.push({ id: `ex-${i}`, ...data });
+        i++;
+      }
+    } catch (e) {
+      console.error('Lỗi parse exercise block:', e.message);
+    }
+  }
+  return exercises;
 }
 
 /**

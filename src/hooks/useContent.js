@@ -21,3 +21,11 @@ export function getVocabulary(unit, page) {
   if (page === undefined || page === '' || page === null) return words;
   return words.filter((w) => String(w.page) === String(page));
 }
+
+/** Trả về mảng bài tập (từ file .md type="exercise") của 1 unit. */
+export function getExercises(unit) {
+  const all = loadAllContent();
+  return all
+    .filter((d) => d.meta.type === 'exercise' && (d.meta.unit ?? 0) === unit)
+    .flatMap((d) => d.exercises);
+}
